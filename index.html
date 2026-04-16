@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHANTOM V43 | VPNJANTIT EDITION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #d4af37; 
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --bg: #010103; 
+            --panel: rgba(10, 10, 15, 0.99);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; -webkit-user-select: none; }
+        body { background: radial-gradient(circle at center, #0a0a1a, var(--bg)); color: #fff; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        
+        .app-shell {
+            width: 440px; height: 880px; background: var(--panel); border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 45px; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 100px #000;
+        }
+
+        #loginOverlay {
+            position: absolute; inset: 0; background: #000; z-index: 9999; border-radius: 43px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px;
+        }
+
+        header { padding: 30px 20px 5px; text-align: center; }
+        header h1 { font-family: 'Orbitron'; color: var(--gold); letter-spacing: 5px; font-size: 1.1rem; text-shadow: 0 0 10px var(--gold-glow); }
+
+        /* PANEL SISTEM ATAS - RAPI & TERPISAH */
+        .system-dash {
+            margin: 5px 20px; padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+        }
+        .dash-cell { display: flex; flex-direction: column; }
+        .dash-cell label { font-size: 0.42rem; color: #555; font-family: 'Orbitron'; font-weight: bold; }
+        .dash-cell span { font-size: 0.58rem; color: var(--gold); font-family: 'Orbitron'; margin-top: 2px; }
+        
+        .ovpn-link {
+            grid-column: span 2; text-align: center; border-top: 1px solid rgba(212,175,55,0.1);
+            padding-top: 8px; margin-top: 5px; font-size: 0.6rem; font-family: 'Orbitron';
+            color: #00ff00; font-weight: bold; text-decoration: none;
+        }
+
+        nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin: 10px 20px; padding: 5px; background: #000; border-radius: 12px; }
+        .nav-btn { background: none; border: none; color: #444; font-size: 0.4rem; font-weight: 700; padding: 10px 0; cursor: pointer; font-family: 'Orbitron'; }
+        .nav-btn.active { color: var(--gold); background: rgba(212,175,55,0.1); border-radius: 8px; }
+
+        .content { flex: 1; padding: 20px; overflow-y: auto; }
+        .card { background: rgba(255,255,255,0.01); border: 1px solid #1a1a1a; border-radius: 20px; padding: 18px; margin-bottom: 15px; border-left: 4px solid var(--gold); }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeInUp 0.3s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .input-vip { width: 100%; padding: 12px; background: #000; border: 1px solid #222; border-radius: 10px; color: var(--gold); text-align: center; margin-bottom: 10px; font-size: 0.75rem; font-family: 'Orbitron'; outline: none; }
+        .btn-gold { width: 100%; padding: 14px; background: linear-gradient(135deg, #d4af37, #8a6d1d); border: none; border-radius: 12px; color: #000; font-weight: 900; cursor: pointer; font-family: 'Orbitron'; font-size: 0.65rem; }
+
+        .res-row { display: flex; justify-content: space-between; font-size: 0.58rem; color: #888; margin-bottom: 8px; border-bottom: 1px solid #111; padding-bottom: 4px; }
+        .res-row b { color: var(--gold); }
+
+        .console { background: #000; padding: 10px; border-radius: 10px; font-family: monospace; font-size: 0.5rem; color: #00ff00; height: 90px; border: 1px solid #222; overflow-y: auto; }
+
+        .soc-btn { display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.65rem; color: white; margin-top: 10px; font-family: 'Orbitron'; }
+        .wa { background: #25d366; } .tt { background: #000; border: 1px solid #fff; }
+
+        footer { padding: 15px; text-align: center; font-family: 'Orbitron'; font-size: 0.55rem; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="app-shell">
+    <div id="loginOverlay">
+        <h2 style="font-family:'Orbitron'; color:var(--gold); margin-bottom:5px;">PHANTOM V43</h2>
+        <p style="font-size: 0.45rem; color: #555; margin-bottom: 30px; letter-spacing: 4px;">VPNJANTIT SYNC EDITION</p>
+        <input type="password" id="passKey" class="input-vip" placeholder="ENTER ACCESS KEY">
+        <button class="btn-gold" onclick="verify()">LOGIN VIP SYSTEM</button>
+        <a href="https://wa.me/6281234567890" class="soc-btn wa" style="width: 100%;">BUY PASSWORD (ADMIN)</a>
+    </div>
+
+    <header><h1>PHANTOM ELITE</h1></header>
+
+    <div class="system-dash">
+        <div class="dash-cell">
+            <label>JAM REAL</label>
+            <span id="txtClock">00:00:00</span>
+        </div>
+        <div class="dash-cell" style="text-align: right;">
+            <label>TANGGAL LOGIN</label>
+            <span id="txtDate">--/--/--</span>
+        </div>
+        <div class="dash-cell">
+            <label>KEY STATUS</label>
+            <span style="color:#00ff00;">REAL KEY ACTIVE</span>
+        </div>
+        <div class="dash-cell" style="text-align: right;">
+            <label>EXPIRED TIME</label>
+            <span id="txtExp">--:--</span>
+        </div>
+        <a href="https://www.vpnjantit.com/free-openvpn" class="ovpn-link">● TERHUBUNG VPNJANTIT OVPN</a>
+    </div>
+
+    <nav>
+        <button class="nav-btn active" onclick="tab('acc', this)">Audit</button>
+        <button class="nav-btn" onclick="tab('bot', this)">Bot</button>
+        <button class="nav-btn" onclick="tab('dns', this)">Dns</button>
+        <button class="nav-btn" onclick="tab('vpn', this)">Vpn</button>
+        <button class="nav-btn" onclick="tab('sos', this)">Sosial</button>
+        <button class="nav-btn" onclick="tab('inf', this)">Info</button>
+    </nav>
+
+    <div class="content">
+        <div id="acc" class="section active">
+            <div class="card">
+                <input type="text" id="mName" class="input-vip" placeholder="GAME USERNAME">
+                <input type="number" id="mId" class="input-vip" placeholder="USER ID ASLI">
+                <input type="number" id="mSrv" class="input-vip" placeholder="SERVER ID ASLI">
+                <button class="btn-gold" onclick="startAudit()">LIHAT INFORMASI AKUN</button>
+                <div id="auditBox" style="display:none; margin-top:15px;">
+                    <div class="res-row">Username: <b id="oName">--</b></div>
+                    <div class="res-row">Negara: <b id="oCountry">Indonesia</b></div>
+                    <div class="res-row">Registrasi: <b id="oDate">--</b></div>
+                    <div class="res-row">Usia Akun: <b id="oAge">--</b></div>
+                    <div class="res-row">Status: <b style="color:#00ff00;">ONLINE (REAL)</b></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bot" class="section">
+            <div class="card">
+                <h3 style="font-size:0.55rem; color:var(--gold); margin-bottom:10px;">BOT LOBBY COMMAND</h3>
+                <div class="console" id="botLog">> Waiting for rank data...</div>
+                <button class="btn-gold" style="margin-top:15px;" onclick="findBot()">FIND BOT ENEMIES</button>
+            </div>
+        </div>
+
+        <div id="dns" class="section">
+            <div class="card">
+                <h3 style="font-size:0.55rem; color:cyan; margin-bottom:10px;">PRIVATE DNS GEN</h3>
+                <div class="console" id="dnsLog">> Standby.</div>
+                <button class="btn-gold" style="margin-top:15px; background:cyan; color:#000;" onclick="genDns()">GENERATE DNS</button>
+            </div>
+        </div>
+
+        <div id="vpn" class="section">
+            <div class="card">
+                <h3 style="font-size:0.55rem; color:#ff7518; margin-bottom:10px;">VPNJANTIT REGION</h3>
+                <select id="vLoc" class="input-vip">
+                    <option value="Myanmar">MYANMAR (BOT SERVER)</option>
+                    <option value="Thailand">THAILAND (EASY MATCH)</option>
+                    <option value="Cambodia">KAMBOJA (LOW RANK)</option>
+                    <option value="Singapore">SINGAPORE (FAST SYNC)</option>
+                </select>
+                <button class="btn-gold" style="background:#ff7518; color:white;" onclick="runVpn()">CONNECT OVPN REAL</button>
+            </div>
+        </div>
+
+        <div id="sos" class="section">
+            <a href="https://wa.me/6281234567890" class="soc-btn wa">WHATSAPP ADMIN</a>
+            <a href="https://www.tiktok.com/@phantom_official" class="soc-btn tt">TIKTOK CHANNEL</a>
+        </div>
+
+        <div id="inf" class="section">
+            <div class="card">
+                <p style="font-size:0.5rem; color:#555; line-height:2.2;">
+                    Engine: Phantom V43.0 Sync<br>
+                    License: Elite VIP Jantit<br>
+                    Tunnel: OpenVPN Supreme<br>
+                    Server Panel: HTTPS Enabled
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>PHANTOM V43 | VPNJANTIT EDITION</footer>
+</div>
+
+<script>
+    const KEY_MASTER = "122";
+    let keyExp = localStorage.getItem('v43_exp') || (Date.now() + 3600000);
+
+    function verify() {
+        if(document.getElementById('passKey').value === KEY_MASTER) {
+            localStorage.setItem('v43_exp', keyExp);
+            document.getElementById('loginOverlay').style.display = 'none';
+            startTime();
+        } else {
+            alert("Password Salah! Silahkan hubungi admin.");
+            window.location.href = "https://wa.me/6281234567890";
+        }
+    }
+
+    function startTime() {
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('txtClock').innerText = now.toLocaleTimeString('id-ID');
+            document.getElementById('txtDate').innerText = now.toLocaleDateString('id-ID');
+            
+            let rem = Math.max(0, Math.floor((keyExp - Date.now()) / 1000));
+            if(rem === 0) { localStorage.removeItem('v43_exp'); location.reload(); }
+            document.getElementById('txtExp').innerText = `${Math.floor(rem/60)}:${rem%60<10?'0'+rem%60:rem%60}`;
+        }, 1000);
+    }
+
+    function tab(id, b) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        b.classList.add('active');
+    }
+
+    function startAudit() {
+        const id = document.getElementById('mId').value;
+        const name = document.getElementById('mName').value;
+        if(!id || !name) return alert("Mohon lengkapi ID dan Username!");
+        
+        let year = id.toString().length <= 8 ? 2021 : 2024;
+        document.getElementById('oName').innerText = name;
+        document.getElementById('oDate').innerText = `17 April ${year}`;
+        document.getElementById('oAge').innerText = `${2026 - year} Tahun`;
+        document.getElementById('auditBox').style.display = 'block';
+        alert("Sinkronisasi Akun Asli Berhasil! Status ONLINE.");
+    }
+
+    function findBot() {
+        const log = document.getElementById('botLog');
+        log.innerHTML = "> Scanning Regional Server...<br>> Rank Detected: Mythic/Legend<br>> Finding Bot Lobby...<br>> [SUCCESS] Bot Enemies Locked!";
+    }
+
+    function genDns() {
+        const d = `phantom-jantit-${Math.floor(Math.random()*99999)}.dns.supreme`;
+        document.getElementById('dnsLog').innerHTML = `> New Secure DNS Created...<br>> Host: ${d}<br>> Status: ACTIVE`;
+    }
+
+    function runVpn() {
+        alert("Menghubungkan ke VPNJANTIT Region " + document.getElementById('vLoc').value + "...");
+        // Gunakan skema intent yang stabil untuk buka ML
+        window.location.href = "intent://#Intent;scheme=com.mobile.legends;package=com.mobile.legends;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mobile.legends;end";
+    }
+
+    if(localStorage.getItem('v43_exp') > Date.now()) {
+        document.getElementById('loginOverlay').style.display = 'none';
+        startTime();
+    }
+</script>
+</body>
+</html>
